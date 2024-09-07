@@ -1,0 +1,15 @@
+<section class="m-3">
+
+  <div class="row g-3">
+
+    @for (product of brandList ; track product._id) {
+    <div class="col-md-2 cursor-pointer ">
+      <div class=" product ">
+        <img [src]="product.image" class="w-100" [alt]="product.name">
+        <h3 class="small text-main p-2">{{product.name}}</h3>
+      </div>
+    </div>
+
+    }
+  </div>
+</section>

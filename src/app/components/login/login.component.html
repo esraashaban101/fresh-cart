@@ -1,0 +1,70 @@
+
+<section class="shadow bg-main-light p-3 my-5 rounded-3">
+  <h1 class="text-main h2">  login Now :</h1>
+ <form [formGroup]="formlogin" (ngSubmit)="loginSubmit()">
+
+
+
+  <div class="my-2">
+    <label for="email">email</label>
+    <input type="email" class="w-100 form-control"  id="email" formControlName="email"
+    [ngClass]="{
+      'is-valid':!formlogin.get('email')?.errors &&  (formlogin.get('email')?.touched || formlogin.get('email')?.dirty),
+      'is-invalid':formlogin.get('email')?.errors &&  (formlogin.get('email')?.touched || formlogin.get('email')?.dirty),
+    }">
+  </div>
+  @if(formlogin.get('email')?.errors && (formlogin.get('email')?.touched || formlogin.get('email')?.dirty))
+  {
+    <div class="w-50">
+      @if(formlogin.get('email')?.getError('required'))
+      {
+       <p class="alert alert-danger">Mail Is Required</p>
+      }
+      @else if(formlogin.get('email')?.getError('email'))
+      {
+       <p class="alert alert-danger">Enter a valid mail</p>
+      }
+
+    </div>
+  }
+
+
+  <div class="my-2">
+    <label for="password" class="my-1">password</label>
+    <input type="password" class="w-100 form-control"  id="password" formControlName="password"
+    [ngClass]="{
+      'is-valid':!formlogin.get('Password')?.errors &&  (formlogin.get('Password')?.touched || formlogin.get('Password')?.dirty),
+      'is-invalid':formlogin.get('Password')?.errors &&  (formlogin.get('Password')?.touched || formlogin.get('Password')?.dirty),
+    }">
+  </div>
+  @if(formlogin.get('password')?.errors &&  (formlogin.get('password')?.touched || formlogin.get('password')?.dirty))
+  {
+    <div class="w-50">
+      @if(formlogin.get('password')?.getError('required'))
+      {
+       <p class="alert alert-danger">password Is Required</p>
+      }
+      @else if(formlogin.get('password')?.getError('pattern'))
+      {
+       <p class="alert alert-danger">Enter a valid password</p>
+      }
+
+    </div>
+  }
+
+
+     <div class="d-flex justify-content-end align-items-center g-5">
+      <a routerLink="/forgetpass" class="link-primary me-3 d-block">Forgot Password?</a>
+      <button class="btn-main my-2" type="submit" [disabled]="formlogin.invalid || isLoading">
+        Login
+        @if(isLoading)
+        {
+          <i class="fas fa-spinner fa-spin"></i>
+        }
+      </button>
+     </div>
+    @if (msgerror) {
+      <p class="alert alert-danger w-50">{{msgerror}}</p>
+    }
+ </form>
+</section>
